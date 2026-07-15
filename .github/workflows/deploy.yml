@@ -1,0 +1,26 @@
+name: Desplegar página estática
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  desplegar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v3
+
+      - name: Verificar que index.html existe
+        run: |
+          if [ -f index.html ]; then
+            echo "index.html encontrado, continuando"
+          else
+            echo "ERROR: index.html no existe"
+            exit 1
+          fi
+
+      - name: Mostrar contenido del archivo
+        run: cat index.html
